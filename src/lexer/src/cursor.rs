@@ -27,8 +27,12 @@ impl Cursor<'_> {
         self.chars.clone()
     }
 
-    pub(crate) fn bump(&mut self) {
-        self.chars.next();
+    pub(crate) fn bump(&mut self) -> Option<char> {
+        let c = self.chars.next()?;
+        Some(c)
+    }
+    pub(crate) fn len_consumed(&self) -> usize {
+        self.initial_len - self.chars.as_str().len()
     }
 }
 
